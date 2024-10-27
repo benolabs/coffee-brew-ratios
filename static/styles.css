@@ -1,0 +1,148 @@
+/* Include the padding and border in an element's total width and height */
+*{
+  box-sizing: border-box;
+}
+
+/* Style the header */
+.header {
+  background-color: #FFFFFF;
+  font-family: "Georgia", serif;
+  font-size: 0.9em;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-style: normal;
+  color: #5a1701;
+  padding:40px;
+  margin: 5px 5px 5px 5px; 
+  text-align: center;
+  border: 1px solid #5a1701;
+  border-radius: 10px;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+table.center {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#myUL input {
+
+  width: 300px;
+  border: 1px solid #5a1701;
+  border-radius: 5px;
+  color: #5a1701;
+  margin: 2px;
+  padding: 5px;
+}
+
+/* Style the "Add" button */
+.grid-Btn {
+  margin: 2px;
+  border: 1px solid #5a1701;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: "Georgia", serif;
+  font-size: 0.9em;
+  color: #5a1701;
+}
+
+.grid-container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+
+}
+
+.grid-item {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #5a1701;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 10px;
+  text-align: left;
+  font-family: "Georgia", serif;
+  font-size: 0.9em;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-style: normal;
+  color: #5a1701;
+}
+
+label {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  text-align: left;
+}
+
+body {
+  background-color: #FFFFFF;
+  font-family: "Georgia", serif;
+  font-size: 0.9em;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-style: normal;
+  color: #5a1701;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 14px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+  animation: fadein 0.5s, fadeout 0.5s 3s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  color: #5a1701;
+}
