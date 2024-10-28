@@ -2,3 +2,6 @@ pydantic
 uvicorn
 fastapi
 Jinja2
+python-multipart
+uuid
+typing
