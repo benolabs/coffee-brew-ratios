@@ -7,18 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brew Ratios</title>
+    <title>Brew Recipe</title>
   </head>
   <body>
     <div class="header">
-    <h1>Brew Ratios</h1>
+    <h1>Brew Recipe</h1>
     <div class="grid-container">
     <form action="/submit/" method="post" enctype="application/x-www-form-urlencoded">
-      <p>Enter the dose and espresso yield, to calculate the brew ratio.</p>
-        <label for="dose">Dose In:</label>
+      <p>Enter some details below of your morning or arvo Coffee brew. </p>
+      <p>A record of your brew recipe will appear below!</p>
+      <br>
+        <label for="coffeebeanname">Coffee bean name:</label>
+        <input type="text" id="coffeebeanname" name="coffeebeanname" class="grid-item" placeholder="Aslan Blend" required><br>
+        <label for="dose">Dose In (grams):</label>
         <input type="text" id="dose" name="dose" class="grid-item" placeholder="20" required><br>
-        <label for="yields">Yield Out:</label>
+        <label for="yields">Yield Out (millitres):</label>
         <input type="text" id="yields" name="yields" class="grid-item" placeholder="40" required><br>
+        <label for="grindsize">Grind Size:</label>
+        <input type="text" id="grindsize" name="grindsize" class="grid-item" placeholder="8" required><br>
         <label for="comments">Comments:</label>
         <input type="text" id="comments" name="comments" class="grid-item" placeholder="Hazelnutty Chocolatey Goodness!" required><br>
         <br>
@@ -31,17 +37,21 @@
   <table class="center">
         <tr>
           <th>Brew No.</th>
-          <th>Dose In</th>
-          <th>Yield Out</th>
+          <th>Coffee Bean name</th>
+          <th>Dose In (grams)</th>
+          <th>Yield Out (millilitres)</th>
+          <th>Grind Size</th>
           <th>Comments</th>
-          <th>Ratio</th>
+          <th>Brew Ratio</th>
         </tr>
         {% for ratio in ratios %}
         <tr id="myUL">
         <form action="/update/{{ratios.index(ratio)}}" method="post">
           <td>Brew No. {{ratios.index(ratio) + 1}}</td>
+          <td><input type="text" id="coffeebeanname" name="coffeebeanname" value="{{ratio.coffeebeanname}}"></td>
           <td><input type="text" id="dose" name="dose" value={{ratio.dose}}></td>
           <td><input type="text" id="yields" name="yields" value={{ratio.yield}}></td>
+          <td><input type="text" id="grindsize" name="grindsize" value={{ratio.grindsize}}></td>
           <td><input type="text" id="comments" name="comments" value="{{ratio.comments}}"></td>
           <td>{{ratio.ratio}}</td>
           <td><button type="submit" class="grid-Btn">Update</button></td>
