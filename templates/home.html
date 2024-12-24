@@ -36,7 +36,6 @@
     <br>
   <table class="center">
         <tr>
-          <th>Brew No.</th>
           <th>Coffee Bean name</th>
           <th>Dose In (grams)</th>
           <th>Yield Out (millilitres)</th>
@@ -46,17 +45,17 @@
         </tr>
         {% for ratio in ratios %}
         <tr id="myUL">
-        <form action="/update/{{ratios.index(ratio)}}" method="post">
-          <td>Brew No. {{ratios.index(ratio) + 1}}</td>
+        <form action="/update/{{ratio.coffeeID}}" method="post">
+          <div style="display: none;">{{ratio.coffeeID}}</div>
           <td><input type="text" id="coffeebeanname" name="coffeebeanname" value="{{ratio.coffeebeanname}}"></td>
           <td><input type="text" id="dose" name="dose" value={{ratio.dose}}></td>
-          <td><input type="text" id="yields" name="yields" value={{ratio.yield}}></td>
+          <td><input type="text" id="yields" name="yields" value={{ratio.yields}}></td>
           <td><input type="text" id="grindsize" name="grindsize" value={{ratio.grindsize}}></td>
           <td><input type="text" id="comments" name="comments" value="{{ratio.comments}}"></td>
           <td>{{ratio.ratio}}</td>
           <td><button type="submit" class="grid-Btn">Update</button></td>
         </form>
-          <td><a href="/delete/{{ratios.index(ratio)}}"><button class="grid-Btn">Delete</button></a></td>
+          <td><a href="/delete/{{ratio.coffeeID}}"><button class="grid-Btn">Delete</button></a></td>
           </tr>
         {% endfor %}
   </table>
