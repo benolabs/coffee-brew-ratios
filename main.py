@@ -7,6 +7,7 @@ from typing import List, Optional
 from uuid import UUID, uuid4
 import mysql.connector
 from dotenv import load_dotenv
+from contextlib import contextmanager
 import os
 
 app = FastAPI()
@@ -17,14 +18,24 @@ MYSQL_USER = os.getenv('MYSQL_USER')
 MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
 MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 
-db = mysql.connector.connect(
-  host=MYSQL_HOST,
-  user=MYSQL_USER,
-  password=MYSQL_PASSWORD,
-  database=MYSQL_DATABASE
-)
+@contextmanager
+def mysql_connection():
+    db = mysql.connector.connect(
+    host=MYSQL_HOST,
+    user=MYSQL_USER,
+    password=MYSQL_PASSWORD,
+    database=MYSQL_DATABASE
+    )
+    mycursor = db.cursor(dictionary=True)
 
-mycursor = db.cursor()
+    try:
+        yield mycursor  # Pass the cursor to the caller
+        db.commit()
+    except Exception as e:
+        return {'error': e.errors()}, 400 
+    finally:
+        mycursor.close()  # Ensure the cursor is closed
+        db.close()  # Ensure the connection is closed
 
 # mycursor.execute("CREATE TABLE coffeebrews (dose VARCHAR(50), yields VARCHAR(50), ratio VARCHAR(50), coffeebeanname VARCHAR(50), grindsize VARCHAR(50), comments VARCHAR(50), coffeeID int PRIMARY KEY AUTO_INCREMENT) AUTO_INCREMENT = 0;")
 
@@ -48,75 +59,41 @@ def getRatio(dose, yields):
 
 @app.get('/')
 async def name(request: Request):
-    try:
-        mycursor = db.cursor(dictionary=True)
+    with mysql_connection() as mycursor:
         mycursor.execute("SELECT * FROM coffeebrews")
         result = mycursor.fetchall()  # Fetch all results
-    
-    except ValidationError as e:
-        return {'error': e.errors()}, 400
-    
-    finally:
-        mycursor.close()
-
     return templates.TemplateResponse("home.html", {"request": request, "ratios": result})
 
 @app.post("/submit/")
 def submit(request: Request, dose: int = Form(...), yields: int = Form(...), comments: str = Form(...), coffeebeanname: str = Form(...), grindsize: int = Form(...)):
-    try:
+    with mysql_connection() as mycursor:
         user = UserForm(dose=dose, yields=yields, comments=comments, coffeebeanname=coffeebeanname, grindsize=grindsize)
         ratio = getRatio(user.dose, user.yields)
-        mycursor = db.cursor(dictionary=True)  
         mycursor.execute("INSERT INTO coffeebrews (dose, yields, ratio, coffeebeanname, grindsize, comments) VALUES (%s,%s,%s,%s,%s,%s)", (user.dose, user.yields, ratio, user.coffeebeanname, user.grindsize, user.comments))
-        db.commit()
-    
-    except ValidationError as e:
-        return {'error': e.errors()}, 400
-    
-    finally:
-        mycursor.close()
-
     return RedirectResponse(url=f"/", status_code=303)
         
 @app.post("/update/{id}")
 async def update(request: Request, id:int, dose: int = Form(...), yields: int = Form(...), comments: str = Form(...), coffeebeanname: str = Form(...), grindsize: int = Form(...)):
 
-    try:
+    with mysql_connection() as mycursor:
         user = UserForm(dose=dose, yields=yields, comments=comments, coffeebeanname=coffeebeanname, grindsize=grindsize)
         newRatio = getRatio(user.dose, user.yields)
-        mycursor = db.cursor(dictionary=True) 
         query = """
         UPDATE coffeebrews
         SET dose = %s, yields = %s, ratio = %s, comments = %s, coffeebeanname = %s, grindsize = %s
         WHERE coffeeID = %s
         """
         mycursor.execute(query, (user.dose, user.yields, newRatio, user.comments, user.coffeebeanname, user.grindsize, id))
-        db.commit()
-    
-    except ValidationError as e:
-        return {'error': e.errors()}, 400
-    
-    finally:
-        mycursor.close()
-
     return RedirectResponse(url=f"/", status_code=303)
 
 @app.get("/delete/{id}")
 def delete_recipe(request: Request, id:int):
-    try:
-        mycursor = db.cursor(dictionary=True)
+
+    with mysql_connection() as mycursor:
         query = """
         DELETE FROM coffeebrews WHERE coffeeID = %s;
         """
         mycursor.execute(query, (id,))
-        db.commit()
-
-    except ValidationError as e:
-        return {'error': e.errors()}, 400
-    
-    finally:
-        mycursor.close()
-    
     return RedirectResponse(url=f"/", status_code=303)
 
 if __name__ == "__main__":
