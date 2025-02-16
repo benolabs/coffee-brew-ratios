@@ -12,4 +12,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: touch ~/ghactionstest.txt
+          script: echo "GH action completed" > ~/githuboutput.txt
