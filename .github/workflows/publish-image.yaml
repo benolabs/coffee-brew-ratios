@@ -27,12 +27,10 @@ jobs:
           tags: ${{ vars.DOCKERHUB_USERNAME }}/brewratio:latest
 
   deploy:
-    name: Deploy to VPS
     runs-on: ubuntu-latest
-    needs:
-      - docker
     steps:
-      - name: deploy to VPS
+      - 
+        name: deloy to VPS
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
@@ -40,4 +38,3 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: whoami
-        
