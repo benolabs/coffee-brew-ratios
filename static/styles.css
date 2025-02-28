@@ -1,9 +1,7 @@
-/* Include the padding and border in an element's total width and height */
 *{
   box-sizing: border-box;
 }
 
-/* Style the header */
 .header {
   background-color: #FFFFFF;
   font-family: "Georgia", serif;
@@ -15,76 +13,8 @@
   padding:40px;
   margin: 5px 5px 5px 5px; 
   text-align: center;
-  border: 1px solid #5a1701;
+  border: 1.5px solid #5a1701;
   border-radius: 10px;
-}
-
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the input */
-table.center {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-}
-
-#myUL input {
-
-  width: 300px;
-  border: 1px solid #5a1701;
-  border-radius: 5px;
-  color: #5a1701;
-  margin: 2px;
-  padding: 5px;
-}
-
-/* Style the "Add" button */
-.grid-Btn {
-  margin: 2px;
-  border: 1px solid #5a1701;
-  border-radius: 5px;
-  padding: 10px;
-  font-family: "Georgia", serif;
-  font-size: 0.9em;
-  color: #5a1701;
-}
-
-.grid-container {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  justify-content: center;
-
-}
-
-.grid-item {
-  width: 100%;
-  background-color: #ffffff;
-  border: 1px solid #5a1701;
-  border-radius: 5px;
-  padding: 15px;
-  margin-top: 10px;
-  text-align: left;
-  font-family: "Georgia", serif;
-  font-size: 0.9em;
-  font-optical-sizing: auto;
-  font-weight: 10;
-  font-style: normal;
-  color: #5a1701;
-}
-
-label {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  text-align: left;
 }
 
 body {
@@ -145,4 +75,80 @@ h1 {
   font-weight: 900;
   font-style: normal;
   color: #5a1701;
+}
+
+#myUL {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+  list-style-type: none;
+}
+
+#myUL label {
+  display: block;
+  text-align: center; 
+  margin-top: 20px
+}
+
+.grid-item {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border: 1.5px solid #5a1701;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: "Georgia", serif;
+  font-size: 1em;
+  font-optical-sizing: auto;
+  font-weight: 10;
+  font-style: normal;
+  color: #5a1701;
+}
+
+.button-28 {
+  appearance: none;
+  background-color: #5a1701;
+  border: 1.5px solid #5a1701;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Georgia", serif;  
+  font-size: 1em;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  margin-top: 30px;
+  max-width: 400px;
+  outline: none;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color:#5a1701;
+  ;
+  background-color: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
 }
