@@ -98,9 +98,8 @@ h1 {
   border: 1.5px solid #5a1701;
   border-radius: 5px;
   padding: 15px;
-  margin-top: 5px;
   display: block;
-  margin: 0 auto;
+  margin: 5px auto auto auto;
   text-align: left;
   font-family: "Georgia", serif;
   font-size: 1em;
