@@ -10,7 +10,7 @@
   font-weight: 10;
   font-style: normal;
   color: #5a1701;
-  padding:40px;
+  padding: 30px;
   margin: 5px 5px 5px 5px; 
   text-align: center;
   border: 1.5px solid #5a1701;
@@ -78,11 +78,11 @@ h1 {
 }
 
 #myUL {
-  margin-left: auto;
-  margin-right: auto;
+  display: block;
   text-align: center;
   justify-content: center;
   list-style-type: none;
+  padding-left: 5px;
 }
 
 #myUL label {
@@ -99,6 +99,8 @@ h1 {
   border-radius: 5px;
   padding: 15px;
   margin-top: 5px;
+  display: block;
+  margin: 0 auto;
   text-align: left;
   font-family: "Georgia", serif;
   font-size: 1em;
@@ -142,7 +144,6 @@ h1 {
 
 .button-28:hover {
   color:#5a1701;
-  ;
   background-color: #FFFFFF;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
