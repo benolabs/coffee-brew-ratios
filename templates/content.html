@@ -1,0 +1,25 @@
+<div id="content-div">
+    {% for ratio in ratios %}
+    <div class="header">
+    <ul id="myUL">
+    <form action="/update/{{ratio.coffeeID}}" method="post">
+      <div style="display: none;">{{ratio.coffeeID}}</div>
+      <label for="coffeebeanname">Coffee bean name:</label>
+      <li><input type="text" id="coffeebeanname" class="grid-item" name="coffeebeanname" value="{{ratio.coffeebeanname}}"></li>
+      <label for="ratio">Brew Ratio:</label>
+      <li><input type="text" id="ratio" name="ratio" class="grid-item" value="{{ratio.ratio}}" disabled></li>
+      <label for="dose">Dose In (grams):</label>
+      <li><input type="text" id="dose" name="dose" class="grid-item" value={{ratio.dose}}></li>
+      <label for="yields">Yield out (millitres):</label>
+      <li><input type="text" id="yields" name="yields" class="grid-item" value={{ratio.yields}}></li>
+      <label for="grindsize">Grind Size:</label>
+      <li><input type="text" id="grindsize" name="grindsize" class="grid-item" value={{ratio.grindsize}}></li>
+      <label for="comments">Comments:</label>
+      <li><input type="text" id="comments" name="comments" class="grid-item" value="{{ratio.comments}}"></li>
+      <li><button type="submit" class="button-28">Update</button></li>
+    </form>
+      <li><a href="/delete/{{ratio.coffeeID}}"><button class="button-28">Delete</button></a></li>
+    </ul>
+    </div>
+    {% endfor %}
+</div>

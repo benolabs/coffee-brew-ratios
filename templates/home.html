@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
   <link href="/static/styles.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,30 +33,19 @@
     </form>
   </ul>
   </div>
-        {% for ratio in ratios %}
-        <div class="header">
-        <ul id="myUL">
-        <form action="/update/{{ratio.coffeeID}}" method="post">
-          <div style="display: none;">{{ratio.coffeeID}}</div>
-          <label for="coffeebeanname">Coffee bean name:</label>
-          <li><input type="text" id="coffeebeanname" class="grid-item" name="coffeebeanname" value="{{ratio.coffeebeanname}}"></li>
-          <label for="ratio">Brew Ratio:</label>
-          <li><input type="text" id="ratio" name="ratio" class="grid-item" value="{{ratio.ratio}}" disabled></li>
-          <label for="dose">Dose In (grams):</label>
-          <li><input type="text" id="dose" name="dose" class="grid-item" value={{ratio.dose}}></li>
-          <label for="yields">Yield out (millitres):</label>
-          <li><input type="text" id="yields" name="yields" class="grid-item" value={{ratio.yields}}></li>
-          <label for="grindsize">Grind Size:</label>
-          <li><input type="text" id="grindsize" name="grindsize" class="grid-item" value={{ratio.grindsize}}></li>
-          <label for="comments">Comments:</label>
-          <li><input type="text" id="comments" name="comments" class="grid-item" value="{{ratio.comments}}"></li>
-          <li><button type="submit" class="button-28">Update</button></li>
-        </form>
-          <li><a href="/delete/{{ratio.coffeeID}}"><button class="button-28">Delete</button></a></li>
-        </ul>
-        </div>
-        {% endfor %}
-    </div>
+
+<div class="header">
+<h3><label for="search">Search coffee recipes</label></h3>
+<input class="form-control grid-item" type="search"
+       name="search" placeholder="Begin typing to search recipes"
+       hx-post="/search/"
+       hx-trigger="input changed delay:600ms, keyup[key=='Enter'], load"
+       hx-target="#content-div">
+</div>
+
+  <div id="content-div">
+  </div>
+  </div>
   <script>
     function clearForm() {
     document.querySelector('form').reset();
