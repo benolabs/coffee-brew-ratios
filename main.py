@@ -48,7 +48,7 @@ class UserForm(BaseModel):
     coffeebeanname: str = Field(min_length=1, max_length=500)
     grindsize: int
     comments: str = Field(min_length=1, max_length=500)
-
+    
 def getRatio(dose, yields):
    coffeeground = dose
    coffeeyield = yields
@@ -95,6 +95,25 @@ def delete_recipe(request: Request, id:int):
         """
         mycursor.execute(query, (id,))
     return RedirectResponse(url=f"/", status_code=303)
+
+# @app.get("/update-content/{sortvalue}")
+# async def name(request: Request, sortvalue: str):
+#     allowed_columns = ['coffeebeanname']
+#     if sortvalue not in allowed_columns:
+#         return {"error": "Invalid sort column"}
+#     with mysql_connection() as mycursor:
+#         query = f"SELECT * FROM coffeebrews ORDER BY {sortvalue} ASC;"
+#         mycursor.execute(query)
+#         result = mycursor.fetchall()  # Fetch all results
+#     return templates.TemplateResponse("content.html", {"request": request, "ratios": result})
+
+@app.post("/search/")
+async def search(request: Request, search: str = Form(...)):
+    with mysql_connection() as mycursor:
+        query = f"SELECT * FROM coffeebrews WHERE coffeebeanname LIKE '%{search}%' OR comments LIKE '%{search}%'"
+        mycursor.execute(query)
+        result = mycursor.fetchall()
+    return templates.TemplateResponse("content.html", {"request": request, "ratios": result})
 
 if __name__ == "__main__":
     import uvicorn

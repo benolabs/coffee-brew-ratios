@@ -100,7 +100,7 @@ h1 {
   padding: 15px;
   margin-top: 5px;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto auto auto;
   text-align: left;
   font-family: "Georgia", serif;
   font-size: 1em;
