@@ -7,3 +7,4 @@ uuid
 typing
 mysql-connector-python
 python-dotenv
+datetime

@@ -8,6 +8,7 @@ from uuid import UUID, uuid4
 import mysql.connector
 from dotenv import load_dotenv
 from contextlib import contextmanager
+from datetime import datetime
 import os
 
 app = FastAPI()
@@ -60,8 +61,9 @@ def getRatio(dose, yields):
 @app.get('/')
 async def name(request: Request):
     with mysql_connection() as mycursor:
-        mycursor.execute("SELECT * FROM coffeebrews")
+        mycursor.execute("select * from coffeebrews order by updated_at desc;")
         result = mycursor.fetchall()  # Fetch all results
+        print(result)
     return templates.TemplateResponse("home.html", {"request": request, "ratios": result})
 
 @app.post("/submit/")
