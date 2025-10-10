@@ -61,7 +61,7 @@ def getRatio(dose, yields):
 @app.get('/')
 async def name(request: Request):
     with mysql_connection() as mycursor:
-        mycursor.execute("select * from coffeebrews order by updated_at desc;")
+        mycursor.execute("SELECT * FROM coffeebrews;")
         result = mycursor.fetchall()  # Fetch all results
         print(result)
     return templates.TemplateResponse("home.html", {"request": request, "ratios": result})
