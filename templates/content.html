@@ -1,5 +1,5 @@
 <div id="content-div">
-    {% for ratio in ratios %}
+    {% for ratio in ratios | reverse %}
     <div class="header">
     <ul id="myUL">
     <form action="/update/{{ratio.coffeeID}}" method="post">
